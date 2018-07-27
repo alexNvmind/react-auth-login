@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div >
         <Switch>
-          <Route exact path="/login" component={() => <Login loginAttempt={loginAttempt} />} />
+          <Route exact path="/login" component={() => <Login setToken={setToken} loginAttempt={loginAttempt} />} />
           <Route exact path="/register" component={() => <Register setToken={setToken} registerUser={registerUser} />} />
           <ProtectedRoute permission={isAllowed} to="/login">
             <Route path="/user" component={UserPage} />

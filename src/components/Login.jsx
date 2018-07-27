@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
+@withRouter
 class Login extends Component {
-    state = { login: '', password: '' }
+    state = { email: '', password: '' }
 
-    handleSubmit = () => {
-        const { login, password } = this.state;
-        const { loginAttempt } = this.props;
-        console.log('this.props', this.props)
-        loginAttempt({ login, password })
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const { email, password } = this.state;
+        const { loginAttempt, setToken } = this.props;
+        loginAttempt({ email, password }).then(({ data: { token } }) => {
+            setToken(token)
+            this.props.history.push('/user')
+        })
     }
 
     handleChange = e => {
@@ -21,7 +25,7 @@ class Login extends Component {
             <div>
                 <Link to="/register">Register</Link>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-                    <input value={this.state.login} name="login" type="email" />
+                    <input value={this.state.email} name="email" type="email" />
                     <input value={this.state.password} name="password" type="password" />
                     <button type="submit">Login</button>
                 </form>

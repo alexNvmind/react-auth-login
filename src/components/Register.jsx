@@ -15,6 +15,7 @@ class Register extends Component {
     }
 
     handleSubmit = (e) => {
+        // smh material button ignores type submit
         e.preventDefault();
         const { registerUser, history, setToken } = this.props;
         registerUser(this.state).then(({ data: { token } }) => {
@@ -37,7 +38,7 @@ class Register extends Component {
                     <Input value={this.state.lastName} name="lastName" type="text" />
                     <Input value={this.state.email} name="email" type="email" />
                     <Input value={this.state.password} name="password" type="password" />
-                    <Button type="submit">Register</Button>
+                    <Button onClick={this.handleSubmit}>Register</Button>
                 </FormGroup>
             </div>
         );

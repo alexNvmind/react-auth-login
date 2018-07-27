@@ -41,8 +41,8 @@ class UserStore {
         return this.token !== null
     }
 
-    @action loginAttempt = ({ login, password }) => {
-        console.log('login, password', login, password)
+    @action loginAttempt = (payload) => {
+        return axiosInstance.post('https://lab.lectrum.io/redux/api/user/login', payload)
     }
     @action registerUser = (payload) => {
         if (!this.connected) return;
